@@ -1,6 +1,10 @@
+import FeaturedReview from "@/components/UI/FeaturedReview";
 import Hero from "@/components/UI/Hero";
+import Items from "@/components/UI/Items";
 import Places from "@/components/UI/Places";
+import RecentUserReviews from "@/components/UI/RecentUserReviews";
 import Image from "next/image";
+import Pricing from "@/components/UI/Pricing";
 import { Fragment } from "react";
 
 /* 
@@ -14,6 +18,10 @@ export default function Home() {
     <Fragment>
       <Hero />
       <Places />
+      <Items />
+      <FeaturedReview />
+      <RecentUserReviews />
+      <Pricing />
     </Fragment>
   );
 }

@@ -9,6 +9,8 @@ module.exports = {
     colors: {
       "primary-color": "#0ea5e9",
       "primary-text": "#1f2937",
+      gold: "#fbbf24",
+      white: "#ffffff",
     },
   },
   plugins: [require("daisyui")],
