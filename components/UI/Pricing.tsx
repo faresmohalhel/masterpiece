@@ -18,18 +18,18 @@ const Pricing = () => {
       </div>
 
       <div className="flex gap-6 flex-col lg:flex-row">
-        <div className="bg-primary-color w-80 flex flex-col px-4 py-6 rounded-xl gap-6 relative shadow-md">
-          <span className="font-semibold text-xl">Professional</span>
+        <div className="bg-white w-80 flex flex-col px-4 py-6 rounded-xl gap-6 relative shadow-md text-primary-text">
+          <span className="font-semibold text-xl">Freebie</span>
           <span className="font-thin">
-            Ideal for individuals who casually try new products and places
+            Ideal for individuals who need quick access to basic features
           </span>
           <span className="flex items-center">
-            <span className="text-5xl font-semibold">$25 </span>
+            <span className="text-5xl font-semibold">$0 </span>
             <span className="text-sm font-thin">/ Month</span>
           </span>
           <a
             href=""
-            className="flex items-center justify-center py-2 bg-white text-primary-color rounded-md"
+            className="flex items-center justify-center py-2 bg-white text-primary-color rounded-md border border-primary-color"
           >
             Get Started Now
           </a>
@@ -44,7 +44,7 @@ const Pricing = () => {
               <span className="font-thin">Access to 1000+ of user reviews</span>
             </span>
             <span className="flex gap-2 items-center">
-              <Icon.IconCircleCheckFilled size={36} />
+              <Icon.IconCircleXFilled size={36} />
               <span className="font-thin">
                 Access to 100+ of expert reviews
               </span>
@@ -84,18 +84,18 @@ const Pricing = () => {
             </span>
           </div>
         </div>
-        <div className="bg-primary-color w-80 flex flex-col px-4 py-6 rounded-xl gap-6 relativex shadow-md">
-          <span className="font-semibold text-xl">Professional</span>
+        <div className="text-primary-text w-80 flex flex-col px-4 py-6 rounded-xl gap-6 relativex shadow-md">
+          <span className="font-semibold text-xl">Life-time Access</span>
           <span className="font-thin">
-            Ideal for individuals who casually try new products and places
+            Ideal for businesses who need personalized services.
           </span>
           <span className="flex items-center">
-            <span className="text-5xl font-semibold">$25 </span>
-            <span className="text-sm font-thin">/ Month</span>
+            <span className="text-5xl font-semibold">$250 </span>
+            <span className="text-sm font-thin">/ Lifetime</span>
           </span>
           <a
             href=""
-            className="flex items-center justify-center py-2 bg-white text-primary-color rounded-md"
+            className="flex items-center justify-center py-2 bg-white text-primary-color border border-primary-color rounded-md"
           >
             Get Started Now
           </a>
@@ -112,7 +112,7 @@ const Pricing = () => {
             <span className="flex gap-2 items-center">
               <Icon.IconCircleCheckFilled size={36} />
               <span className="font-thin">
-                Access to 100+ of expert reviews
+                Unlimited Access to expert reviews
               </span>
             </span>
           </div>

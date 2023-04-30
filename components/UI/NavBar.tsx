@@ -38,7 +38,7 @@ function NavBar() {
           </ul>
         </div>
         <a className="btn btn-ghost normal-case text-xl text-primary-text">
-          Reviews
+          <span className="text-primary-text font-sans font-bold">Reviews</span>
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">

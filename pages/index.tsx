@@ -6,6 +6,7 @@ import RecentUserReviews from "@/components/UI/RecentUserReviews";
 import Image from "next/image";
 import Pricing from "@/components/UI/Pricing";
 import { Fragment } from "react";
+import HowItWorks from "@/components/UI/HowItWorks";
 
 /* 
 importing fonts???
@@ -22,6 +23,7 @@ export default function Home() {
       <FeaturedReview />
       <RecentUserReviews />
       <Pricing />
+      <HowItWorks />
     </Fragment>
   );
 }

@@ -12,7 +12,7 @@ const Rating: React.FC<{
       <input
         type="radio"
         name="rating-8"
-        className="mask mask-star-2 bg-orange-400 w-12"
+        className="mask mask-star-2 bg-orange-300"
         checked={i + 1 === props.stars}
         readOnly={props.readonly}
       />
@@ -20,7 +20,7 @@ const Rating: React.FC<{
   }
 
   return (
-    <div className={`rating rating-lg ${props.className}`}>
+    <div className={`rating rating-sm ${props.className}`}>
       {stars.map((element) => element)}
     </div>
   );
