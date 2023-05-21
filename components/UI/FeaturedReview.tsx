@@ -14,8 +14,10 @@ const FeaturedReview = () => {
           className="bg-cover w-auto max-h-36 rounded-md shadow-md"
         />
         <div className="lg:max-w-[25%] gap-2 flex flex-col">
-          <p className="font-semibold text-xl">Car Washing Business Name</p>
-          <p>
+          <p className="font-semibold text-xl overflow-hidden">
+            Car Washing Business Name
+          </p>
+          <p className="overflow-hidden">
             Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet
             consectetur.Lorem ipsum dolor sit amet consectetur
           </p>

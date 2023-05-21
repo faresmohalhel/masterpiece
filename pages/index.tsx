@@ -7,6 +7,7 @@ import Image from "next/image";
 import Pricing from "@/components/UI/Pricing";
 import { Fragment } from "react";
 import HowItWorks from "@/components/UI/HowItWorks";
+import CarouselComponent from "@/components/UI/Carousel";
 
 /* 
 importing fonts???
@@ -18,6 +19,7 @@ export default function Home() {
   return (
     <Fragment>
       <Hero />
+      <CarouselComponent />
       <Places />
       <Items />
       <FeaturedReview />

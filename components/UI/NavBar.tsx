@@ -1,100 +1,142 @@
-function NavBar() {
-  return (
-    <div className="navbar bg-base-100 sticky top-0 z-50">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <label
-            tabIndex={0}
-            className="btn btn-ghost lg:hidden bg-primary-text"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-primary-text"
-          >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 2</a>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul>
-        </div>
-        <a className="btn btn-ghost normal-case text-xl text-primary-text">
-          <span className="text-primary-text font-sans font-bold">Reviews</span>
+import React from "react";
+import {
+  Navbar,
+  MobileNav,
+  Typography,
+  Button,
+  IconButton,
+  Card,
+  Input,
+} from "@material-tailwind/react";
+
+export default function NavBar() {
+  const [openNav, setOpenNav] = React.useState(false);
+
+  React.useEffect(() => {
+    window.addEventListener(
+      "resize",
+      () => window.innerWidth >= 960 && setOpenNav(false)
+    );
+  }, []);
+
+  const navList = (
+    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <a href="#" className="flex items-center">
+          Places
         </a>
-      </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-primary-text">
-          <li>
-            <a>About</a>
-          </li>
-          <li>
-            <a>Contact Us</a>
-          </li>
-          <li>
-            <a>Reviews</a>
-          </li>
-        </ul>
-      </div>
-      <div className="navbar-end">
-        <div className="flex gap-2">
-          <div className="form-control">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered text-primary-text"
-            />
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <a href="#" className="flex items-center">
+          Products
+        </a>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="blue-gray"
+        className="p-1 font-normal"
+      >
+        <a href="#" className="flex items-center">
+          About
+        </a>
+      </Typography>
+    </ul>
+  );
+
+  return (
+    <>
+      <Navbar className="sticky inset-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4">
+        <div className="flex items-center justify-between text-blue-gray-900 flex-wrap">
+          <div className="flex items-center gap-4">
+            <Typography
+              as="a"
+              href="#"
+              className="mr-4 cursor-pointer py-1.5 font-medium"
+            >
+              Material Tailwind
+            </Typography>
+            <div className="mr-4 hidden lg:block">{navList}</div>
           </div>
-          {true && (
-            <a className="btn bg-sky-500 text-white hover:bg-sky-600 border-none">
-              Get started
-            </a>
-          )}
-          {false && (
-            <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  <img src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />
-                </div>
-              </label>
-              <ul
-                tabIndex={0}
-                className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 text-primary-text"
-              >
-                <li>
-                  <a className="justify-between">Profile</a>
-                </li>
-                <li>
-                  <a>Settings</a>
-                </li>
-                <li>
-                  <a>Logout</a>
-                </li>
-              </ul>
+          <div className="relative flex w-full gap-2 md:w-max md:order-none order-last justify-self-start">
+            <Input
+              type="search"
+              label="Type here..."
+              className="pr-20"
+              containerProps={{
+                className: "min-w-[288px]",
+              }}
+            />
+            <Button size="sm" className="!absolute right-1 top-1 rounded">
+              Search
+            </Button>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="hidden gap-2 lg:flex">
+              <Button variant="text" size="sm" color="blue-gray">
+                Sign In
+              </Button>
+              <Button variant="gradient" size="sm">
+                Sign Up
+              </Button>
             </div>
-          )}
+            <IconButton
+              variant="text"
+              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+              ripple={false}
+              onClick={() => setOpenNav(!openNav)}
+            >
+              {openNav ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  className="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </IconButton>
+          </div>
         </div>
-      </div>
-    </div>
+
+        <MobileNav open={openNav}>
+          {navList}
+          <Button variant="gradient" size="sm" fullWidth className="mb-2">
+            <span>Buy Now</span>
+          </Button>
+        </MobileNav>
+      </Navbar>
+    </>
   );
 }
-
-export default NavBar;
