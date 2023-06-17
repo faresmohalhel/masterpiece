@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Navbar,
   MobileNav,
@@ -19,6 +19,25 @@ export default function NavBar() {
     );
   }, []);
 
+  const componentRef = useRef(null);
+  const [isAtTop, setIsAtTop] = useState(true);
+
+  const checkIfAtTop = () => {
+    const { top } = componentRef.current.getBoundingClientRect();
+    setIsAtTop(top <= 0);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      checkIfAtTop();
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography
@@ -27,7 +46,7 @@ export default function NavBar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <a href="#" className="flex items-center  text-white">
           Places
         </a>
       </Typography>
@@ -37,7 +56,7 @@ export default function NavBar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <a href="#" className="flex items-center  text-white">
           Products
         </a>
       </Typography>
@@ -47,7 +66,7 @@ export default function NavBar() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <a href="#" className="flex items-center  text-white">
           About
         </a>
       </Typography>
@@ -56,15 +75,21 @@ export default function NavBar() {
 
   return (
     <>
-      <Navbar className="sticky inset-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4">
+      <Navbar
+        id="navbar"
+        ref={componentRef}
+        className={`sticky inset-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4 border-x-transparent border-t-transparent border-b-gray-700 ${
+          isAtTop ? "bg-transparent" : ""
+        }`}
+      >
         <div className="flex items-center justify-between text-blue-gray-900 flex-wrap">
           <div className="flex items-center gap-4">
             <Typography
               as="a"
               href="#"
-              className="mr-4 cursor-pointer py-1.5 font-medium"
+              className="mr-4 cursor-pointer py-1.5 font-medium text-white"
             >
-              Material Tailwind
+              RatePlaza
             </Typography>
             <div className="mr-4 hidden lg:block">{navList}</div>
           </div>
@@ -77,13 +102,16 @@ export default function NavBar() {
                 className: "min-w-[288px]",
               }}
             />
-            <Button size="sm" className="!absolute right-1 top-1 rounded">
+            <Button
+              size="sm"
+              className="!absolute right-1 top-1 rounded bg-orange-600"
+            >
               Search
             </Button>
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden gap-2 lg:flex">
-              <Button variant="text" size="sm" color="blue-gray">
+              <Button variant="text" size="sm" color="white">
                 Sign In
               </Button>
               <Button variant="gradient" size="sm">

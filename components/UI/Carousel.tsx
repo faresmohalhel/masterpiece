@@ -1,52 +1,116 @@
-import { Carousel } from "@material-tailwind/react";
-import { useState, useEffect } from "react";
+import { Carousel, Typography, Button } from "@material-tailwind/react";
 
 export default function CarouselComponent() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const length = 3; // Number of carousel items
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % length);
-    }, 500); // Adjust the interval duration (in milliseconds) as needed
-
-    return () => clearInterval(interval); // Clear the interval on component unmount
-  }, [length]);
-
   return (
-    <Carousel
-      // activeIndex={activeIndex}
-      // onSlideChange={setActiveIndex}
-      className="rounded-xl"
-      navigation={({ setActiveIndex, activeIndex, length }) => (
-        <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
-          {new Array(length).fill("").map((_, i) => (
-            <span
-              key={i}
-              className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
-                activeIndex === i ? "bg-white w-8" : "bg-white/50 w-4"
-              }`}
-              onClick={() => setActiveIndex(i)}
-            />
-          ))}
+    <Carousel className="rounded-xl relative -top-20">
+      <div className="relative h-screen w-full">
+        <img
+          src="https://images.pexels.com/photos/2977515/pexels-photo-2977515.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt="image 1"
+          className="h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75">
+          <div className="w-3/4 text-center md:w-2/4">
+            <Typography
+              variant="h1"
+              color="white"
+              className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+            >
+              The Beauty of Nature
+            </Typography>
+            <Typography
+              variant="lead"
+              color="white"
+              className="mb-12 opacity-80"
+            >
+              It is not so much for its beauty that the forest makes a claim
+              upon men&apos;s hearts, as for that subtle something, that quality
+              of air that emanation from old trees, that so wonderfully changes
+              and renews a weary spirit.
+            </Typography>
+            <div className="flex justify-center gap-2">
+              <Button size="lg" color="white">
+                Explore
+              </Button>
+              <Button size="lg" color="white" variant="text">
+                Gallery
+              </Button>
+            </div>
+          </div>
         </div>
-      )}
-    >
-      <img
-        src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
-        alt="image 1"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80"
-        alt="image 2"
-        className="h-full w-full object-cover"
-      />
-      <img
-        src="https://images.unsplash.com/photo-1518623489648-a173ef7824f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2762&q=80"
-        alt="image 3"
-        className="h-full w-full object-cover"
-      />
+      </div>
+      <div className="relative  h-screen w-full">
+        <img
+          src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
+          alt="image 1"
+          className="h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75">
+          <div className="w-3/4 text-center md:w-2/4">
+            <Typography
+              variant="h1"
+              color="white"
+              className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+            >
+              The Beauty of Nature
+            </Typography>
+            <Typography
+              variant="lead"
+              color="white"
+              className="mb-12 opacity-80"
+            >
+              It is not so much for its beauty that the forest makes a claim
+              upon men&apos;s hearts, as for that subtle something, that quality
+              of air that emanation from old trees, that so wonderfully changes
+              and renews a weary spirit.
+            </Typography>
+            <div className="flex justify-center gap-2">
+              <Button size="lg" color="white">
+                Explore
+              </Button>
+              <Button size="lg" color="white" variant="text">
+                Gallery
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="relative  h-screen w-full">
+        <img
+          src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2560&q=80"
+          alt="image 1"
+          className="h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 grid h-full w-full place-items-center bg-black/75">
+          <div className="w-3/4 text-center md:w-2/4">
+            <Typography
+              variant="h1"
+              color="white"
+              className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+            >
+              The Beauty of Nature
+            </Typography>
+            <Typography
+              variant="lead"
+              color="white"
+              className="mb-12 opacity-80"
+            >
+              It is not so much for its beauty that the forest makes a claim
+              upon men&apos;s hearts, as for that subtle something, that quality
+              of air that emanation from old trees, that so wonderfully changes
+              and renews a weary spirit.
+            </Typography>
+            <div className="flex justify-center gap-2">
+              <Button size="lg" color="white">
+                Explore
+              </Button>
+              <Button size="lg" color="white" variant="text">
+                Gallery
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
     </Carousel>
   );
 }

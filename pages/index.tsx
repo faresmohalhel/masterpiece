@@ -18,8 +18,8 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   return (
     <Fragment>
-      <Hero />
       <CarouselComponent />
+      <Hero />
       <Places />
       <Items />
       <FeaturedReview />

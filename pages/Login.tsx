@@ -1,6 +1,14 @@
 import Registration from "@/components/UI/Registration";
+import { useState } from "react";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(event.target.email.value);
+  };
+
   return (
     <div className="bg-white ">
       <div className="flex lg:flex-row-reverse flex-col-reverse items-center min-h-screen pt-6 sm:justify-center sm:pt-0">
@@ -10,7 +18,7 @@ const Login = () => {
           className="max-w-full lg:max-w-lg max-h-full"
         />
         <div className="w-full lg:w-1/2 px-6 py-4 mt-6 overflow-hidden bg-white sm:max-w-lg sm:rounded-lg">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mt-4">
               <label
                 htmlFor="email"
@@ -22,7 +30,7 @@ const Login = () => {
                 <input
                   type="email"
                   name="email"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-full mt-1 text-gray-900 border-gray-300 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
@@ -36,8 +44,9 @@ const Login = () => {
               <div className="flex flex-col items-start">
                 <input
                   type="password"
+                  required
                   name="password"
-                  className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="block w-full mt-1 text-gray-900 border-gray-300 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
