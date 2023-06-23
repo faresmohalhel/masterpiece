@@ -1,12 +1,31 @@
 import Registration from "@/components/UI/Registration";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event.target.email.value);
+
+    console.log(email, password);
+
+    const result = await signIn("credentials", {
+      email: email,
+      password: password,
+      redirect: true,
+      callbackUrl: "http://localhost:3000/",
+    });
+  };
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    console.log(email);
+  };
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    console.log(password);
   };
 
   return (
@@ -31,6 +50,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   className="block w-full mt-1 text-gray-900 border-gray-300 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onChange={handleEmailChange}
                 />
               </div>
             </div>
@@ -47,6 +67,7 @@ const Login = () => {
                   required
                   name="password"
                   className="block w-full mt-1 text-gray-900 border-gray-300 border rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onChange={handlePasswordChange}
                 />
               </div>
             </div>
@@ -55,7 +76,10 @@ const Login = () => {
               Forget Password?
             </a>
             <div className="flex items-center mt-4">
-              <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary-color rounded-md hover:bg-sky-400 focus:outline-none focus:bg-primary-color">
+              <button
+                className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary-color rounded-md hover:bg-sky-400 focus:outline-none focus:bg-primary-color"
+                onClick={() => console.log(email, password)}
+              >
                 Login
               </button>
             </div>

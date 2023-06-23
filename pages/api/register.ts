@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import { getCookies, setCookie, getCookie, deleteCookie } from "cookies-next";
 import { serialize } from "cookie";
 
-const users = async (req, res) => {
+const users = async (req: any, res: any) => {
   if (req.method === "POST") {
     try {
       console.log("connecting to mongo");
@@ -59,10 +59,10 @@ const users = async (req, res) => {
       //   httpOnly: true,
       // });
 
-      const cookie = serialize("token", token, {
-        path: "/",
-        httpOnly: true,
-      });
+      // const cookie = serialize("token", token, {
+      //   path: "/",
+      //   httpOnly: true,
+      // });
 
       res.status(201).json({
         status: "success",

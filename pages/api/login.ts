@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import { getCookies, setCookie, getCookie, deleteCookie } from "cookies-next";
 import { serialize } from "cookie";
 
-const users = async (req, res) => {
+const users = async (req: any, res: any) => {
   if (req.method === "POST") {
     try {
       console.log("connecting to mongo");
@@ -22,6 +22,7 @@ const users = async (req, res) => {
       }
 
       const user = await User.findOne({ email });
+      console.log("login", email, password, user);
 
       console.log(await bcrypt.compare(password, user.password));
       if (user && (await bcrypt.compare(password, user.password))) {
@@ -35,12 +36,12 @@ const users = async (req, res) => {
         user.token = token;
         // setCookie("token", token);
 
-        const cookie = serialize("token", token, {
-          path: "/",
-          httpOnly: true,
-        });
+        // const cookie = serialize("token", token, {
+        //   path: "/",
+        //   httpOnly: true,
+        // });
 
-        res.setHeader("Set-Cookie", cookie);
+        // res.setHeader("Set-Cookie", cookie);
 
         console.log("iom here");
 
