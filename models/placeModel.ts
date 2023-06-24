@@ -1,21 +1,27 @@
 import mongoose, { models } from "mongoose";
 
-const itemSchema = new mongoose.Schema({
+const placeSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "an item must have a name"],
+    required: [true, "an place must have a name"],
     trim: true,
     unique: true,
   },
   description: {
     type: String,
-    required: [true, "an item must have an description"],
+    required: [true, "an place must have an description"],
   },
   category: {
     type: String,
   },
   image: {
     type: String,
+  },
+  location: {
+    type:String,
+  },
+  locationName: {
+    type:String
   },
   expertReview: {
     rating: {
@@ -46,6 +52,6 @@ const itemSchema = new mongoose.Schema({
   ],
 });
 
-const Item = models.Item || mongoose.model("Item", itemSchema);
+const Place = models.Place || mongoose.model("Place", placeSchema);
 
-export default Item;
+export default Place;

@@ -15,7 +15,7 @@ const Login = () => {
       email: email,
       password: password,
       redirect: true,
-      callbackUrl: "http://localhost:3000/",
+      callbackUrl: "/",
     });
   };
 

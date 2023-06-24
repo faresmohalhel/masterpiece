@@ -9,6 +9,8 @@ import {
   Input,
 } from "@material-tailwind/react";
 
+import { useSession } from "next-auth/react";
+
 export default function NavBar() {
   const [openNav, setOpenNav] = React.useState(false);
 
@@ -27,6 +29,8 @@ export default function NavBar() {
     setIsAtTop(top <= 0);
   };
 
+  const { data: session } = useSession();
+
   useEffect(() => {
     const handleScroll = () => {
       checkIfAtTop();
@@ -39,34 +43,34 @@ export default function NavBar() {
   }, []);
 
   const navList = (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 text-gray-900">
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center  text-white">
+        <a href="#" className="flex items-center">
           Places
         </a>
       </Typography>
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center  text-white">
+        <a href="#" className="flex items-center  ">
           Products
         </a>
       </Typography>
       <Typography
         as="li"
         variant="small"
-        color="blue-gray"
+        color="gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center  text-white">
+        <a href="#" className="flex items-center">
           About
         </a>
       </Typography>
@@ -78,7 +82,7 @@ export default function NavBar() {
       <Navbar
         id="navbar"
         ref={componentRef}
-        className={`sticky inset-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4 border-x-transparent border-t-transparent border-b-gray-700 ${
+        className={`sticky inset-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4 border-x-transparent border-t-transparent text-gray-900 border-b-gray-700 ${
           isAtTop ? "bg-transparent" : ""
         }`}
       >
@@ -87,7 +91,8 @@ export default function NavBar() {
             <Typography
               as="a"
               href="#"
-              className="mr-4 cursor-pointer py-1.5 font-medium text-white"
+              className="mr-4 cursor-pointer py-1.5 font-medium"
+              color="gray"
             >
               RatePlaza
             </Typography>
@@ -98,6 +103,7 @@ export default function NavBar() {
               type="search"
               label="Type here..."
               className="pr-20"
+              color="gray"
               containerProps={{
                 className: "min-w-[288px]",
               }}
@@ -111,12 +117,18 @@ export default function NavBar() {
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden gap-2 lg:flex">
-              <Button variant="text" size="sm" color="white">
-                Sign In
-              </Button>
-              <Button variant="gradient" size="sm">
-                Sign Up
-              </Button>
+              {session?.user ? (
+                <p>welcome {session?.user.name}</p>
+              ) : (
+                <div>
+                  <Button variant="text" size="sm" color="gray">
+                    Sign In
+                  </Button>
+                  <Button variant="gradient" size="sm" color="orange">
+                    Sign Up
+                  </Button>
+                </div>
+              )}
             </div>
             <IconButton
               variant="text"

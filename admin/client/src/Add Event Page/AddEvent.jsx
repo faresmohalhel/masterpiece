@@ -25,6 +25,7 @@ export const AddEvent = () => {
   const [numberOfTrees, setNumberOfTrees] = useState(0);
   const [treePrice, setTreePrice] = useState(0);
   const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
 
   const [map, setMap] = useState(null);
@@ -125,21 +126,12 @@ export const AddEvent = () => {
     console.log(selectedLocation);
 
     try {
-      const response = await axios.post("http://localhost:5500/add-event", {
+      const response = await axios.post("http://localhost:3000/api/items", {
         name,
-        startDate,
-        eventLength,
-        maxVolunteers,
-        numberOfTrees,
-        treePrice,
         description,
-        image,
-        location: {
-          lat: markerPosition.lat,
-          lng: markerPosition.lng,
-        },
-        locationName: selectedLocation,
+        category,
       });
+
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -187,6 +179,10 @@ export const AddEvent = () => {
     // 👇 Get input value from "event"
     setLocationName(event.target.value);
   };
+  const handleCategoryChange = (event) => {
+    // 👇 Get input value from "event"
+    setCategory(event.target.value);
+  };
   return (
     <>
       <main className="p-4 px-8  md:ml-64 h-auto pt-20 mt-8">
@@ -203,7 +199,6 @@ export const AddEvent = () => {
               id="name"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Event Name"
-              required
               onChange={handleNameChange}
             />
           </div>
@@ -218,7 +213,6 @@ export const AddEvent = () => {
               type="date"
               id="startDate"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
               min={minimumDateString}
               onChange={handleStartDateChange}
             />
@@ -234,7 +228,6 @@ export const AddEvent = () => {
               type="number"
               id="eventLength"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
               onChange={handleEventLengthChange}
             />
           </div>
@@ -249,7 +242,6 @@ export const AddEvent = () => {
               type="number"
               id="maxVolunteers"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
               onChange={handleMaxVolunteersChange}
             />
           </div>
@@ -265,7 +257,6 @@ export const AddEvent = () => {
               type="number"
               id="numberOfTrees"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
               onChange={handleNumberOfTreesChange}
             />
           </div>
@@ -280,7 +271,6 @@ export const AddEvent = () => {
               type="number"
               id="treePrice"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
               onChange={handleTreePriceChange}
             />
           </div>
@@ -296,8 +286,22 @@ export const AddEvent = () => {
               id="description"
               placeholder="Description"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              require
               onChange={handleDescriptionChange}
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              HtmlFor="category"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Category
+            </label>
+            <input
+              type="text"
+              id="category"
+              placeholder="category"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onChange={handleCategoryChange}
             />
           </div>
           <div className=" mb-6">
