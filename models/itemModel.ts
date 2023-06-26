@@ -14,6 +14,9 @@ const itemSchema = new mongoose.Schema({
   category: {
     type: String,
   },
+  slug: {
+    type: String,
+  },
   image: {
     type: String,
   },
@@ -44,6 +47,14 @@ const itemSchema = new mongoose.Schema({
       },
     },
   ],
+  expertRating: {
+    type: Number,
+    default: 4,
+  },
+  userRating: {
+    type: Number,
+    default: 4,
+  },
 });
 
 const Item = models.Item || mongoose.model("Item", itemSchema);

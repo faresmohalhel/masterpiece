@@ -173,16 +173,40 @@ const Product = ({ product }) => {
 export default Product;
 
 export const getStaticPaths = async () => {
-  return {
-    paths: [
-      {
-        params: {
-          slug: "test item",
-        },
-      }, // See the "paths" section below
-    ],
-    fallback: true, // false or "blocking"
-  };
+  try {
+    await connectMongo();
+    const items = await Item.find();
+
+    const paths = items.map((item) => {
+      return {
+        params: { slug: item.slug },
+      };
+    });
+    return {
+      paths,
+      fallback: true, // false or "blocking"
+    };
+  } catch (error) {
+    console.log(error);
+  }
+  // const products = await axios.get("/api/items");
+  // const productsData = await products.items;
+  // console.log(productsData);
+
+  // Generate the paths array based on the fetched data
+  // const paths = productsData.map((product) => ({
+  //   params: { slug: product.slug },
+  // }));
+
+  // Return the paths object
+  // return {
+  //   paths: [
+  //     {
+  //       params: { slug: "test-item" },
+  //     },
+  //   ],
+  //   fallback: true,
+  // };
 };
 
 export async function getStaticProps(context) {
@@ -190,7 +214,7 @@ export async function getStaticProps(context) {
 
   try {
     await connectMongo();
-    const item = await Item.findOne({ name: context.params.slug });
+    const item = await Item.findOne({ slug: context.params.slug });
     console.log("item", item);
     return {
       props: {

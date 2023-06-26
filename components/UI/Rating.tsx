@@ -13,7 +13,7 @@ const Rating: React.FC<{
         type="radio"
         name="rating-8"
         className="mask mask-star-2 bg-orange-300"
-        checked={i + 1 === props.stars}
+        // checked={i + 1 === props.stars}
         readOnly={props.readonly}
       />
     );

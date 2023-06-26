@@ -7,12 +7,18 @@ import {
   IconButton,
   Card,
   Input,
+  Collapse,
 } from "@material-tailwind/react";
 
 import { useSession } from "next-auth/react";
 
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 export default function NavBar() {
   const [openNav, setOpenNav] = React.useState(false);
+
+  const Router = useRouter();
 
   React.useEffect(() => {
     window.addEventListener(
@@ -42,6 +48,20 @@ export default function NavBar() {
     };
   }, []);
 
+  const handleInputChange = (e) => {
+    searchQuery = e.target.value;
+    console.log(searchQuery);
+  };
+
+  const handleClick = () => {
+    Router.push({
+      pathname: "/search",
+      query: {
+        name: searchQuery,
+      },
+    });
+  };
+
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 text-gray-900">
       <Typography
@@ -50,19 +70,9 @@ export default function NavBar() {
         color="gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
-          Places
-        </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="gray"
-        className="p-1 font-normal"
-      >
-        <a href="#" className="flex items-center  ">
+        <Link href="/search" className="flex items-center">
           Products
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -70,12 +80,24 @@ export default function NavBar() {
         color="gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <Link href="about" className="flex items-center  ">
           About
-        </a>
+        </Link>
+      </Typography>
+      <Typography
+        as="li"
+        variant="small"
+        color="gray"
+        className="p-1 font-normal"
+      >
+        <Link href="/contact-us" className="flex items-center">
+          Contact Us
+        </Link>
       </Typography>
     </ul>
   );
+
+  let searchQuery: String;
 
   return (
     <>
@@ -88,14 +110,9 @@ export default function NavBar() {
       >
         <div className="flex items-center justify-between text-blue-gray-900 flex-wrap">
           <div className="flex items-center gap-4">
-            <Typography
-              as="a"
-              href="#"
-              className="mr-4 cursor-pointer py-1.5 font-medium"
-              color="gray"
-            >
+            <Link href="/" className="mr-4 cursor-pointer py-1.5 font-medium">
               RatePlaza
-            </Typography>
+            </Link>
             <div className="mr-4 hidden lg:block">{navList}</div>
           </div>
           <div className="relative flex w-full gap-2 md:w-max md:order-none order-last justify-self-start">
@@ -104,6 +121,7 @@ export default function NavBar() {
               label="Type here..."
               className="pr-20"
               color="gray"
+              onChange={handleInputChange}
               containerProps={{
                 className: "min-w-[288px]",
               }}
@@ -111,6 +129,7 @@ export default function NavBar() {
             <Button
               size="sm"
               className="!absolute right-1 top-1 rounded bg-orange-600"
+              onClick={handleClick}
             >
               Search
             </Button>
@@ -170,12 +189,12 @@ export default function NavBar() {
           </div>
         </div>
 
-        <MobileNav open={openNav}>
+        <Collapse open={openNav}>
           {navList}
           <Button variant="gradient" size="sm" fullWidth className="mb-2">
             <span>Buy Now</span>
           </Button>
-        </MobileNav>
+        </Collapse>
       </Navbar>
     </>
   );
