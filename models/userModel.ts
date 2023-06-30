@@ -22,6 +22,17 @@ const userSchema = new mongoose.Schema({
   token: {
     type: String,
   },
+  subscribed: {
+    type: Boolean,
+    default: false,
+  },
+  subscriptionExpirationDate: {
+    type: Date,
+  },
+  active: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const User = models.User || mongoose.model("User", userSchema);

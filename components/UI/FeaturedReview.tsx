@@ -4,20 +4,20 @@ import * as Icon from "@tabler/icons-react";
 
 const FeaturedReview = () => {
   return (
-    <div className="flex flex-col justify-center items-center py-24 space-y-12">
+    <div className="flex flex-col justify-center items-center py-24 space-y-12 text-sm">
       <SubTitle title="Featured Item" />
 
-      <div className="flex items-center space-x-6 justify-center mx-auto w-full bg-primary-color h-48">
+      <div className="flex flex-col md:flex-row items-center space-x-6 justify-center mx-auto w-full bg-orange-500  px-0 md:px-4 py-6">
         <img
           src="https://images.pexels.com/photos/372810/pexels-photo-372810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt="prodcut image"
-          className="bg-cover w-auto max-h-36 rounded-md shadow-md"
+          className="bg-cover w-36 lg:w-auto max-h-36 rounded-md shadow-md pb-4"
         />
         <div className="lg:max-w-[25%] gap-2 flex flex-col">
-          <p className="font-semibold text-xl overflow-hidden">
+          <p className="font-bold text-xl overflow-hidden ">
             Car Washing Business Name
           </p>
-          <p className="overflow-hidden">
+          <p className="overflow-hidden font-semibold">
             Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet
             consectetur.Lorem ipsum dolor sit amet consectetur
           </p>

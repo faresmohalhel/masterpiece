@@ -19,9 +19,9 @@ export default function Home() {
   return (
     <Fragment>
       <CarouselComponent />
-      <Hero />
-      <Places />
       <Items />
+      <Places />
+      <Hero />
       <FeaturedReview />
       <RecentUserReviews />
       <Pricing />

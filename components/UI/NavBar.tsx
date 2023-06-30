@@ -8,9 +8,16 @@ import {
   Card,
   Input,
   Collapse,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Avatar,
 } from "@material-tailwind/react";
 
-import { useSession } from "next-auth/react";
+import { IconSettings, IconUserCircle } from "@tabler/icons-react";
+
+import { useSession, signOut } from "next-auth/react";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -70,7 +77,7 @@ export default function NavBar() {
         color="gray"
         className="p-1 font-normal"
       >
-        <Link href="/search" className="flex items-center">
+        <Link href="/search" className="flex items-center hover:underline">
           Products
         </Link>
       </Typography>
@@ -80,7 +87,7 @@ export default function NavBar() {
         color="gray"
         className="p-1 font-normal"
       >
-        <Link href="about" className="flex items-center  ">
+        <Link href="/about" className="flex items-center hover:underline">
           About
         </Link>
       </Typography>
@@ -90,7 +97,7 @@ export default function NavBar() {
         color="gray"
         className="p-1 font-normal"
       >
-        <Link href="/contact-us" className="flex items-center">
+        <Link href="/contact-us" className="flex items-center hover:underline">
           Contact Us
         </Link>
       </Typography>
@@ -108,14 +115,17 @@ export default function NavBar() {
           isAtTop ? "bg-transparent" : ""
         }`}
       >
-        <div className="flex items-center justify-between text-blue-gray-900 flex-wrap">
+        <div className="flex items-center  text-blue-gray-900 flex-wrap justify-between">
           <div className="flex items-center gap-4">
-            <Link href="/" className="mr-4 cursor-pointer py-1.5 font-medium">
+            <Link
+              href="/"
+              className="mr-4 cursor-pointer py-1.5 font-medium text-orange-500"
+            >
               RatePlaza
             </Link>
             <div className="mr-4 hidden lg:block">{navList}</div>
           </div>
-          <div className="relative flex w-full gap-2 md:w-max md:order-none order-last justify-self-start">
+          <div className="relative flex w-full gap-2 md:w-max md:order-none order-last justify-self-start lg:after:w-[172px] xl:after:w-[220px]">
             <Input
               type="search"
               label="Type here..."
@@ -128,7 +138,7 @@ export default function NavBar() {
             />
             <Button
               size="sm"
-              className="!absolute right-1 top-1 rounded bg-orange-600"
+              className="!absolute right-1  lg:right-[136px] xl:right-[163px]  top-1 rounded bg-orange-600"
               onClick={handleClick}
             >
               Search
@@ -137,15 +147,46 @@ export default function NavBar() {
           <div className="flex items-center gap-4">
             <div className="hidden gap-2 lg:flex">
               {session?.user ? (
-                <p>welcome {session?.user.name}</p>
+                <Menu>
+                  <MenuHandler>
+                    <Button variant="outlined" color="orange">
+                      Welcome, {session?.user.name}
+                    </Button>
+                  </MenuHandler>
+                  <MenuList>
+                    <MenuItem className="flex items-center gap-2">
+                      <IconUserCircle strokeWidth={2} className="h-4 w-4" />
+                      <Typography variant="small" className="font-normal">
+                        My Profile
+                      </Typography>
+                    </MenuItem>
+
+                    <hr className="my-2 border-blue-gray-50" />
+                    <MenuItem
+                      className="flex items-center gap-2 "
+                      onClick={(e) => {
+                        signOut({ callbackUrl: "/" });
+                      }}
+                    >
+                      <IconSettings strokeWidth={2} className="h-4 w-4" />
+                      <Typography variant="small" className="font-normal">
+                        Sign Out
+                      </Typography>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
               ) : (
                 <div>
-                  <Button variant="text" size="sm" color="gray">
-                    Sign In
-                  </Button>
-                  <Button variant="gradient" size="sm" color="orange">
-                    Sign Up
-                  </Button>
+                  <Link href={{ pathname: "/Login" }}>
+                    <Button variant="text" size="sm" color="gray">
+                      Sign In
+                    </Button>
+                  </Link>
+                  <Link href={{ pathname: "/register" }}>
+                    <Button variant="gradient" size="sm" color="orange">
+                      Sign Up
+                    </Button>
+                  </Link>
                 </div>
               )}
             </div>
@@ -191,9 +232,49 @@ export default function NavBar() {
 
         <Collapse open={openNav}>
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2">
-            <span>Buy Now</span>
-          </Button>
+          {session?.user ? (
+            <Menu>
+              <MenuHandler>
+                <Button variant="outlined" color="orange">
+                  Welcome, {session?.user.name}
+                </Button>
+              </MenuHandler>
+              <MenuList>
+                <MenuItem className="flex items-center gap-2">
+                  <IconUserCircle strokeWidth={2} className="h-4 w-4" />
+                  <Typography variant="small" className="font-normal">
+                    My Profile
+                  </Typography>
+                </MenuItem>
+
+                <hr className="my-2 border-blue-gray-50" />
+                <MenuItem
+                  className="flex items-center gap-2 "
+                  onClick={(e) => {
+                    signOut({ callbackUrl: "/" });
+                  }}
+                >
+                  <IconSettings strokeWidth={2} className="h-4 w-4" />
+                  <Typography variant="small" className="font-normal">
+                    Sign Out
+                  </Typography>
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          ) : (
+            <div>
+              <Link href={{ pathname: "/Login" }}>
+                <Button variant="text" size="sm" color="gray">
+                  Sign In
+                </Button>
+              </Link>
+              <Link href={{ pathname: "/register" }}>
+                <Button variant="gradient" size="sm" color="orange">
+                  Sign Up
+                </Button>
+              </Link>
+            </div>
+          )}
         </Collapse>
       </Navbar>
     </>

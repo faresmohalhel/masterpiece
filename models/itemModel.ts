@@ -31,7 +31,7 @@ const itemSchema = new mongoose.Schema({
       type: String,
     },
   },
-  userReviews: [
+  usersReviews: [
     {
       username: {
         type: String,
@@ -45,15 +45,26 @@ const itemSchema = new mongoose.Schema({
       description: {
         type: String,
       },
+      date: {
+        type: Date,
+      },
     },
   ],
+  deleted: {
+    type: Boolean,
+    default: false,
+  },
+  active: {
+    type: Boolean,
+    default: true,
+  },
   expertRating: {
     type: Number,
-    default: 4,
+    default: 0,
   },
-  userRating: {
+  usersRating: {
     type: Number,
-    default: 4,
+    default: 0,
   },
 });
 

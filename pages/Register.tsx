@@ -1,4 +1,58 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { signIn } from "next-auth/react";
+
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+
+  const handleNameChange = (event) => {
+    console.log(event.target.value);
+    setName(event.target.value);
+  };
+  const handleEmailChange = (event) => {
+    console.log(event.target.value);
+    setEmail(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    console.log(event.target.value);
+    setPassword(event.target.value);
+  };
+  const handlePasswordConfirmationChange = (event) => {
+    console.log(event.target.value);
+    setPasswordConfirmation(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(name, email, password, passwordConfirmation);
+    if (
+      name &&
+      email &&
+      password &&
+      passwordConfirmation &&
+      password === passwordConfirmation
+    ) {
+      const res = await axios.post("/api/register", {
+        name,
+        email,
+        password,
+        role: "user",
+      });
+
+      if (res.data.status == "success") {
+        const result = await signIn("credentials", {
+          email: email,
+          password: password,
+          redirect: true,
+          callbackUrl: "/",
+        });
+      }
+    }
+  };
+
   return (
     <div className="bg-white ">
       <div className="flex lg:flex-row-reverse flex-col-reverse items-center min-h-screen pt-6 sm:justify-center sm:pt-0">
@@ -8,7 +62,7 @@ const Register = () => {
           className="max-w-full lg:max-w-lg max-h-full"
         />
         <div className="w-full lg:w-1/2 px-6 py-4 mt-6 overflow-hidden bg-white sm:max-w-lg sm:rounded-lg">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="name"
@@ -20,7 +74,9 @@ const Register = () => {
                 <input
                   type="text"
                   name="name"
+                  id="name"
                   className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onChange={handleNameChange}
                 />
               </div>
             </div>
@@ -35,7 +91,9 @@ const Register = () => {
                 <input
                   type="email"
                   name="email"
+                  id="email"
                   className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onChange={handleEmailChange}
                 />
               </div>
             </div>
@@ -50,7 +108,9 @@ const Register = () => {
                 <input
                   type="password"
                   name="password"
+                  id="password"
                   className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onChange={handlePasswordChange}
                 />
               </div>
             </div>
@@ -65,7 +125,9 @@ const Register = () => {
                 <input
                   type="password"
                   name="password_confirmation"
+                  id="password_confirmation"
                   className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  onChange={handlePasswordConfirmationChange}
                 />
               </div>
             </div>

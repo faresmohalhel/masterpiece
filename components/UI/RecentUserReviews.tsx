@@ -1,7 +1,27 @@
 import ReviewBox from "./ReviewBox";
 import SubTitle from "./SubTitle";
 
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 const RecentUserReviews = () => {
+  const [recentReviews, setRecentReviews] = useState([]);
+
+  useEffect(() => {
+    async function getReviews() {
+      try {
+        const res = (await axios.get("/api/recent-reviews")).data;
+        setRecentReviews(res.reviews.usersReviews);
+        console.log(res.reviews.usersReviews);
+      } catch (error: any) {
+        console.log(error.message);
+      }
+    }
+
+    console.log(recentReviews);
+    getReviews();
+  }, []);
+
   return (
     <div className="flex flex-col justify-center items-center gap-12 pb-12 px-12">
       <SubTitle title="Recent User Reviews" />

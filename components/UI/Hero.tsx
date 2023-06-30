@@ -1,7 +1,7 @@
 const Hero = () => {
   return (
-    <div className="grid w-full place-items-center min-h-screen bg-base-100 relative text-primary-text mx-auto py-24">
-      <div className="hero-content flex-col gap-28 lg:flex-row-reverse justify-between">
+    <div className="grid w-full place-items-center bg-base-100 relative text-primary-text mx-auto pb-24">
+      {/* <div className="hero-content flex-col gap-28 lg:flex-row-reverse justify-between">
         <img src="/hero image.png" className="w-full lg:max-w-sm rounded-lg" />
         <div className="lg:w-1/2">
           <h1 className="text-5xl font-bold">Box Office News!</h1>
@@ -19,7 +19,7 @@ const Hero = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="flex flex-col gap-12 items-center pt-14">
         <h2 className="font-semibold text-xl text-center">
           More than 150+ businesses 2200+ products 15000+ user reviews
@@ -27,36 +27,36 @@ const Hero = () => {
         <div className="flex flex-col lg:flex-row gap-6">
           <div className="flex gap-6">
             <img
-              src="/talabat-logo.png"
+              src="/talabat logo.png"
               alt="talabat logo"
               className="w-20 lg:w-36"
             />
             <img
-              src="/talabat-logo.png"
-              alt="talabat logo"
-              className="w-20 lg:w-36"
+              src="/open-sooq.png"
+              alt="open sooq logo"
+              className="w-20 lg:w-36 bg-cover"
             />
             <img
-              src="/talabat-logo.png"
-              alt="talabat logo"
+              src="/smart buy.png"
+              alt="smart buy logo"
               className="w-20 lg:w-36"
             />
           </div>
 
           <div className="flex gap-6">
             <img
-              src="/talabat-logo.png"
-              alt="talabat logo"
+              src="/ashely furniture.png"
+              alt="ashely furniture logo"
               className="w-20 lg:w-36"
             />
             <img
-              src="/talabat-logo.png"
-              alt="talabat logo"
+              src="/kayali jewelery.png"
+              alt="kayali jewelery logo"
               className="w-20 lg:w-36"
             />
             <img
-              src="/talabat-logo.png"
-              alt="talabat logo"
+              src="/shein logo.png"
+              alt="shein logo"
               className="w-20 lg:w-36"
             />
           </div>

@@ -6,7 +6,15 @@ import jwt from "jsonwebtoken";
 import { getCookies, setCookie, getCookie, deleteCookie } from "cookies-next";
 import { serialize } from "cookie";
 
-const users = async (req: any, res: any) => {
+import NextCors from "nextjs-cors";
+
+const handler = async (req: any, res: any) => {
+  await NextCors(req, res, {
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+    origin: "*",
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
+
   if (req.method === "POST") {
     try {
       console.log("connecting to mongo");
@@ -53,16 +61,6 @@ const users = async (req: any, res: any) => {
       );
 
       user.token = token;
-      // setCookie("token", token);
-      // res.cookies.set("token", token, {
-      //   path: "/",
-      //   httpOnly: true,
-      // });
-
-      // const cookie = serialize("token", token, {
-      //   path: "/",
-      //   httpOnly: true,
-      // });
 
       res.status(201).json({
         status: "success",
@@ -72,6 +70,7 @@ const users = async (req: any, res: any) => {
           password: user.password,
           role: user.role,
           token: user.token,
+          subscribed: user.subscribed,
         },
       });
     } catch (error) {
@@ -81,4 +80,4 @@ const users = async (req: any, res: any) => {
   }
 };
 
-export default users;
+export default handler;

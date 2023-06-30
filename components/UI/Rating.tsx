@@ -21,7 +21,7 @@ const Rating: React.FC<{
 
   return (
     <div className={`rating rating-sm ${props.className}`}>
-      {stars.map((element) => element)}
+      {/* {stars.map((element) => element.key = Math.random() return )} */}
     </div>
   );
 };

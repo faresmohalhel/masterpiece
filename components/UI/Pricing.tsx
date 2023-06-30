@@ -1,15 +1,32 @@
-import * as Icon from "@tabler/icons-react";
-
+import Link from "next/link";
 import SubTitle from "./SubTitle";
 
+import { useSession } from "next-auth/react";
+
+import * as Icon from "@tabler/icons-react";
+
 const Pricing = () => {
+  const { data: session } = useSession();
+
+  let pathname;
+  if (!session?.user) {
+    pathname = "/Login";
+  } else if (session?.user.subscribed === true) {
+    pathname = "/search";
+  } else {
+    pathname = "/payment";
+  }
+
   return (
-    <div className="flex flex-col justify-center items-center gap-12 py-12">
+    <div
+      className="flex flex-col justify-center items-center gap-12 py-12 scroll-smooth"
+      id="pricing"
+    >
       <SubTitle title="Pricing" />
 
       <div className="flex flex-col text-primary-text items-center justify-center gap-4">
         <span className="text-4xl font-bold">You deserve a better</span>
-        <span className="text-4xl font-bold bg-white border-text-primary-color">
+        <span className="text-4xl font-bold bg-white border-text-orange-500">
           Experience
         </span>
         <span className="font-thin">
@@ -27,12 +44,12 @@ const Pricing = () => {
             <span className="text-5xl font-semibold">$0 </span>
             <span className="text-sm font-thin">/ Month</span>
           </span>
-          <a
-            href=""
-            className="flex items-center justify-center py-2 bg-white text-primary-color rounded-md border border-primary-color"
+          <Link
+            href={{ pathname }}
+            className="flex items-center justify-center py-2 bg-white text-orange-500 rounded-md border border-orange-500"
           >
             Get Started Now
-          </a>
+          </Link>
 
           <div className="flex flex-col gap-2">
             <span className="flex gap-2 items-center">
@@ -51,21 +68,21 @@ const Pricing = () => {
             </span>
           </div>
         </div>
-        <div className="bg-primary-color w-80 flex flex-col px-4 py-6 rounded-xl gap-6 relative top-[-10px] shadow-md">
+        <div className="bg-orange-500 w-80 flex flex-col px-4 py-6 rounded-xl gap-6 relative top-[-10px] shadow-md">
           <span className="font-semibold text-xl">Professional</span>
           <span className="font-thin">
             Ideal for individuals who casually try new products and places
           </span>
           <span className="flex items-center">
-            <span className="text-5xl font-semibold">$25 </span>
+            <span className="text-5xl font-semibold">$20 </span>
             <span className="text-sm font-thin">/ Month</span>
           </span>
-          <a
-            href=""
-            className="flex items-center justify-center py-2 bg-white text-primary-color rounded-md"
+          <Link
+            href={{ pathname }}
+            className="flex items-center justify-center py-2 bg-white text-orange-500 rounded-md"
           >
             Get Started Now
-          </a>
+          </Link>
 
           <div className="flex flex-col gap-2">
             <span className="flex gap-2 items-center">
@@ -90,15 +107,15 @@ const Pricing = () => {
             Ideal for businesses who need personalized services.
           </span>
           <span className="flex items-center">
-            <span className="text-5xl font-semibold">$250 </span>
+            <span className="text-5xl font-semibold">$500 </span>
             <span className="text-sm font-thin">/ Lifetime</span>
           </span>
-          <a
-            href=""
-            className="flex items-center justify-center py-2 bg-white text-primary-color border border-primary-color rounded-md"
+          <Link
+            href={{ pathname }}
+            className="flex items-center justify-center py-2 bg-white text-orange-500 border border-orange-500 rounded-md"
           >
             Get Started Now
-          </a>
+          </Link>
 
           <div className="flex flex-col gap-2">
             <span className="flex gap-2 items-center">

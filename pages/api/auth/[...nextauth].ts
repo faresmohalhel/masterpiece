@@ -18,9 +18,10 @@ export const authOptions: NextAuthOptions = {
           password,
         });
         const user = res.data.user;
-        console.log(email, password, res, user);
+        // console.log(email, password, res, user);
 
         if (res.status === 200 && user) {
+          console.log(user);
           return user;
         } else return null;
       },
@@ -31,16 +32,21 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: "/Login",
+    signOut: "/",
   },
-  // callbacks: {
-  //   async jwt({ token, user }) {
-  //     return { ...token, ...user };
-  //   },
-  //   async session({ session, token, user }) {
-  //     session.user = token;
-  //     return session;
-  //   },
-  // },
+  callbacks: {
+    async jwt({ token, user, trigger, session }) {
+      if (trigger === "update" && session.subscribed) {
+        token.subscribed = session.subscribed;
+      }
+      return { ...token, ...user };
+    },
+    async session({ session, token, user }) {
+      console.log("user", token);
+      session.user = token;
+      return Promise.resolve(session);
+    },
+  },
 };
 
 export default NextAuth(authOptions);

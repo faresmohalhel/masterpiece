@@ -52,6 +52,8 @@ const users = async (req: any, res: any) => {
             email: user.email,
             role: user.role,
             token: user.token,
+            subscribed: user.subscribed,
+            subscriptionExpirationDate: user.subscriptionExpirationDate,
           },
         });
       }

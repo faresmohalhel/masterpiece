@@ -1,3 +1,4 @@
+import { Image } from "next/image";
 import connectMongo from "@/utils/connectMongo";
 import Item from "@/models/itemModel";
 
@@ -19,7 +20,7 @@ export default async function handler(req, res) {
       await connectMongo();
       console.log("connected to mongo, items");
 
-      const { name, description, category } = req.body;
+      const { name, description, category, image } = req.body;
       console.log(name, description, category);
 
       if (!(name && description && category)) {
@@ -32,6 +33,7 @@ export default async function handler(req, res) {
         name,
         description,
         category,
+        image,
         slug: slugify(name),
       });
 
@@ -58,16 +60,89 @@ export default async function handler(req, res) {
       await connectMongo();
       console.log("connected to mongo, items");
 
-      const items = await Item.find();
+      const items = await Item.find({
+        deleted: false,
+      });
       res.json({ status: "success", items: items });
     } catch (error) {
       res.json({ status: "fail", message: error });
     }
   }
+
+  if (req.method === "PATCH") {
+    try {
+      console.log("connecting to mongo, update items");
+      await connectMongo();
+      console.log("connected to mongo, update items");
+
+      const { name, description, category, expertRating, image } = req.body;
+
+      let updateObject = {};
+
+      if (description) {
+        updateObject.description = description;
+      }
+      if (category) {
+        updateObject.category = category;
+      }
+      if (image) {
+        updateObject.image = image;
+      }
+      if (expertRating) {
+        updateObject.expertRating = expertRating;
+      }
+
+      const item = await Item.findOneAndUpdate(
+        {
+          slug: slugify(name),
+        },
+        updateObject
+      );
+
+      res.status(200).json({
+        status: "success",
+        item: {
+          name: item.name,
+          description: item.description,
+          category: item.category,
+          slug: item.slug,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({ status: "fail", message: error });
+    }
+  }
+  if (req.method === "PUT") {
+    try {
+      console.log("connecting to mongo, delete items");
+      await connectMongo();
+      console.log("connected to mongo, delete items");
+
+      const { name } = req.body;
+      console.log(name);
+
+      const item = await Item.findOneAndUpdate(
+        {
+          slug: slugify(name),
+        },
+        {
+          deleted: true,
+        }
+      );
+
+      res.status(200).json({
+        status: "success",
+        item: {
+          name: item.name,
+          description: item.description,
+          category: item.category,
+          slug: item.slug,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      res.json({ status: "fail", message: error });
+    }
+  }
 }
-
-// const items = async (req: any, res: any) => {
-
-// };
-
-// export default items;

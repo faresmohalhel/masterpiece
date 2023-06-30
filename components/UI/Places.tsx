@@ -4,7 +4,7 @@ import SubTitle from "./SubTitle";
 const Places = () => {
   return (
     <Fragment>
-      <div className="flex flex-col items-center bg-base-100 gap-6 lg:gap-12 pb-24">
+      <div className="flex flex-col items-center bg-base-100 gap-6 lg:gap-12 py-24">
         <SubTitle title="Explore Places" />
         <div className="bg-base-100 flex space-x-4 lg:space-x-12 justify-center">
           <div className="flex flex-col justify-center items-center">
