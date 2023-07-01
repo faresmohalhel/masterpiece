@@ -11,8 +11,12 @@ const RecentUserReviews = () => {
     async function getReviews() {
       try {
         const res = (await axios.get("/api/recent-reviews")).data;
-        setRecentReviews(res.reviews.usersReviews);
-        console.log(res.reviews.usersReviews);
+        setRecentReviews(
+          res.reviews.usersReviews.flat().length > 10
+            ? res.reviews.userReviews.flat().slice(0, 10)
+            : res.reviews.usersReviews.flat()
+        );
+        console.log(res.reviews.usersReviews.flat());
       } catch (error: any) {
         console.log(error.message);
       }
@@ -26,47 +30,19 @@ const RecentUserReviews = () => {
     <div className="flex flex-col justify-center items-center gap-12 pb-12 px-12">
       <SubTitle title="Recent User Reviews" />
 
-      <div className="grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 gap-3">
-        <ReviewBox
-          image="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=600"
-          rating={4}
-          description="i really enjoyed the product would definitely try it again"
-        />
-        <ReviewBox
-          image="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=600"
-          rating={4}
-          description="i really enjoyed the product would definitely try it again"
-        />
-        <ReviewBox
-          image="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=600"
-          rating={4}
-          description="i really enjoyed the product would definitely try it again"
-        />
-        <ReviewBox
-          image="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=600"
-          rating={4}
-          description="i really enjoyed the product would definitely try it again"
-        />
-        <ReviewBox
-          image="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=600"
-          rating={4}
-          description="i really enjoyed the product would definitely try it again"
-        />
-        <ReviewBox
-          image="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=600"
-          rating={4}
-          description="i really enjoyed the product would definitely try it again"
-        />
-        <ReviewBox
-          image="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=600"
-          rating={4}
-          description="i really enjoyed the product would definitely try it again"
-        />
-        <ReviewBox
-          image="https://images.pexels.com/photos/34534/people-peoples-homeless-male.jpg?auto=compress&cs=tinysrgb&w=600"
-          rating={4}
-          description="i really enjoyed the product would definitely try it again"
-        />
+      <div className="flex flex-wrap gap-3">
+        {recentReviews.map((review) => {
+          return (
+            <ReviewBox
+              key={Math.random()}
+              rating={review.rating}
+              description={review.description}
+              title={review.title}
+              username={review.username}
+              date={review.date}
+            />
+          );
+        })}
       </div>
     </div>
   );
