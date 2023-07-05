@@ -24,7 +24,7 @@ currently not available
 - figma
 - git and github
 
-## project brief
+# project brief
 Welcome to RatePlaza, the ultimate platform that connects users through their valuable reviews and expert insights. At RatePlaza, we believe in the power of user-generated content, allowing users to share their experiences and opinions on various products and businesses.
 
 Our website serves as a hub where users can read and contribute reviews, helping each other make informed decisions. With our intuitive interface, finding reviews is a breeze. Simply search for a product or business, and instantly access a wealth of user feedback.
