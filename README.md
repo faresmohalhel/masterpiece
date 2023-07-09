@@ -76,4 +76,4 @@ The payment system for accessing expert reviews should be secure and comply with
 
 
 ## presentation
-(link)[https://tome.app/rateplaza/rateplaza-your-one-stop-shop-for-expert-reviews-and-user-ratings-cljq3qe5l01fops3amwlx1ktd]
+[link](https://tome.app/rateplaza/rateplaza-your-one-stop-shop-for-expert-reviews-and-user-ratings-cljq3qe5l01fops3amwlx1ktd)
