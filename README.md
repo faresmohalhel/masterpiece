@@ -1,5 +1,3 @@
-# masterpiece
-
 # project description
 a website where users can find user and expert reviews on different topics and places
 
